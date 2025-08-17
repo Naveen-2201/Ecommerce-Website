@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Clothora — Trendy Clothing Store</title>
+  <meta name="description" content="Clothora is a modern, responsive clothing store. Shop tees, denim, dresses, and more." />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Skip to content for accessibility -->
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-wrap">
+      <button id="btnMobileMenu" class="icon-btn mobile-only" aria-label="Open menu" aria-expanded="false">
+        <span class="icon">☰</span>
+      </button>
+
+      <a class="brand" href="#" aria-label="Clothora home">
+        <span class="brand__logo">C</span>
+        <span class="brand__name">Clothora</span>
+      </a>
+
+      <form id="searchForm" class="search" role="search" aria-label="Site search">
+        <input id="searchInput" type="search" placeholder="Search clothing, brands, colors…" aria-label="Search products" />
+        <button class="btn" type="submit" aria-label="Search">Search</button>
+      </form>
+
+      <nav id="mainNav" class="nav">
+        <a href="#" class="nav__link" data-cat="All">All</a>
+        <a href="#" class="nav__link" data-cat="Men">Men</a>
+        <a href="#" class="nav__link" data-cat="Women">Women</a>
+        <a href="#" class="nav__link" data-cat="Kids">Kids</a>
+        <a href="#" class="nav__link" data-cat="Accessories">Accessories</a>
+        <a href="#" class="nav__link" data-cat="Sale">Sale</a>
+      </nav>
+
+      <div class="header-actions">
+        <button id="btnTheme" class="icon-btn" aria-label="Toggle theme" title="Toggle light/dark">🌓</button>
+        <button id="btnCart" class="icon-btn" aria-label="Open cart drawer" aria-haspopup="dialog">
+          🛒 <span id="cartCount" class="badge" aria-live="polite">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero" role="banner" aria-label="Promotional">
+    <div class="container hero__content">
+      <div>
+        <h1>Fall ‘25 Collection</h1>
+        <p>Layer up in style—premium basics, sustainable denim, and cozy knits.</p>
+        <a href="#" id="shopNow" class="btn btn--primary">Shop Now</a>
+      </div>
+      <picture>
+        <source srcset="zendaya.jpg" media="(min-width: 00px)">
+        <img alt="Models wearing fall collection" loading="lazy"
+             src="zendaya-small.jpg">
+      </picture>
+    </div>
+  </section>
+
+  <main id="main" class="container main">
+    <aside id="filters" class="filters" aria-label="Product filters">
+      <div class="filters__section">
+        <h2>Filters</h2>
+        <button id="btnClearFilters" class="link">Clear all</button>
+      </div>
+
+      <div class="filters__section">
+        <h3>Category</h3>
+        <div id="filterCategories" class="chip-group" role="group" aria-label="Category"></div>
+      </div>
+
+      <div class="filters__section">
+        <h3>Size</h3>
+        <div id="filterSizes" class="chip-group" role="group" aria-label="Size">
+          <!-- JS will populate -->
+        </div>
+      </div>
+
+      <div class="filters__section">
+        <h3>Price</h3>
+        <div class="range">
+          <label>
+            Min
+            <input id="minPrice" type="number" min="0" step="10" value="0" />
+          </label>
+          <label>
+            Max
+            <input id="maxPrice" type="number" min="0" step="10" value="5000" />
+          </label>
+          <button id="btnApplyPrice" class="btn btn--sm">Apply</button>
+        </div>
+      </div>
+
+      <div class="filters__section">
+        <h3>Sort by</h3>
+        <select id="sortSelect" aria-label="Sort products">
+          <option value="featured">Featured</option>
+          <option value="priceAsc">Price: Low to High</option>
+          <option value="priceDesc">Price: High to Low</option>
+          <option value="ratingDesc">Rating: High to Low</option>
+          <option value="newest">Newest</option>
+        </select>
+      </div>
+    </aside>
+
+    <section class="catalog" aria-live="polite">
+      <header class="catalog__header">
+        <h2 id="resultTitle">All Products</h2>
+        <span id="resultCount" class="muted">0 items</span>
+      </header>
+
+      <div id="productGrid" class="grid">
+        <!-- JS will render product cards -->
+      </div>
+
+      <div class="pagination" id="pagination">
+        <!-- JS rendered pager -->
+      </div>
+    </section>
+  </main>
+
+  <!-- Cart Drawer -->
+  <div id="cartDrawer" class="drawer" role="dialog" aria-modal="true" aria-labelledby="cartTitle" aria-hidden="true">
+    <div class="drawer__panel">
+      <header class="drawer__header">
+        <h2 id="cartTitle">Your Cart</h2>
+        <button id="btnCloseCart" class="icon-btn" aria-label="Close cart">✕</button>
+      </header>
+      <div id="cartItems" class="drawer__body">
+        <!-- JS renders cart items -->
+      </div>
+      <footer class="drawer__footer">
+        <div class="totals">
+          <div><span>Subtotal</span><strong id="subtotal">₹0</strong></div>
+          <div><span>Shipping</span><strong id="shipping">₹0</strong></div>
+          <div><span>Tax (5%)</span><strong id="tax">₹0</strong></div>
+          <div class="totals__grand"><span>Total</span><strong id="grandTotal">₹0</strong></div>
+        </div>
+        <form id="couponForm" class="coupon">
+          <input id="couponInput" type="text" placeholder="Coupon code" aria-label="Coupon code" />
+          <button class="btn btn--sm" type="submit">Apply</button>
+          <small id="couponMsg" class="muted"></small>
+        </form>
+        <button id="btnCheckout" class="btn btn--primary btn--full">Checkout</button>
+      </footer>
+    </div>
+    <button class="drawer__backdrop" id="cartBackdrop" aria-label="Close cart"></button>
+  </div>
+
+  <!-- Checkout Modal -->
+  <div id="checkoutModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="checkoutTitle" aria-hidden="true">
+    <div class="modal__panel">
+      <header class="modal__header">
+        <h3 id="checkoutTitle">Checkout</h3>
+        <button id="btnCloseCheckout" class="icon-btn" aria-label="Close checkout">✕</button>
+      </header>
+      <form id="checkoutForm" class="checkout-form">
+        <div class="grid grid--2">
+          <label>Full Name
+            <input required name="name" type="text" placeholder="Your name" />
+          </label>
+          <label>Email
+            <input required name="email" type="email" placeholder="you@example.com" />
+          </label>
+          <label>Address
+            <input required name="address" type="text" placeholder="Street, City, ZIP" />
+          </label>
+          <label>Phone
+            <input required name="phone" type="tel" placeholder="+91-XXXXXXXXXX" />
+          </label>
+          <label>Card Number
+            <input required name="card" inputmode="numeric" pattern="[0-9 ]{12,19}" placeholder="4242 4242 4242 4242" />
+          </label>
+          <label>Expiry (MM/YY)
+            <input required name="exp" pattern="^(0[1-9]|1[0-2])\\/\\d{2}$" placeholder="08/27" />
+          </label>
+          <label>CVV
+            <input required name="cvv" inputmode="numeric" pattern="\\d{3,4}" placeholder="123" />
+          </label>
+        </div>
+        <button class="btn btn--primary btn--full" type="submit">Pay Now</button>
+        <p class="muted center">This is a demo—no real payment is processed.</p>
+      </form>
+    </div>
+    <button id="checkoutBackdrop" class="modal__backdrop" aria-label="Close checkout"></button>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <h4>Clothora</h4>
+        <p class="muted">Sustainable style. Fair prices. Fast shipping.</p>
+      </div>
+      <nav aria-label="Footer">
+        <a href="#">About</a>
+        <a href="#">Shipping</a>
+        <a href="#">Returns</a>
+        <a href="#">Contact</a>
+      </nav>
+      <form class="newsletter" id="newsletterForm">
+        <label>
+          <span>Get updates</span>
+          <input type="email" id="newsletterEmail" placeholder="you@example.com" required>
+        </label>
+        <button class="btn btn--sm" type="submit">Subscribe</button>
+        <small id="newsletterMsg" class="muted"></small>
+      </form>
+    </div>
+    <div class="container tiny center muted">© <span id="year"></span> Clothora. All rights reserved.</div>
+  </footer>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
